@@ -1,35 +1,16 @@
 import { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
-import { collectionFilms } from './data/films'
 import FilmVue from './fonctionalites/films/vues/Film.vue'
-import axios from 'axios'
+import UseFilms from './hooks/useFilms'
+
 import Exemple from './fonctionalites/exemple/Exemple'
 import Exemple1 from './fonctionalites/exemple/Exemple1'
 
 export default function App() {
-  const [films, setFilms] = useState(collectionFilms)
-  const [loading, setLoading] = useState(true)
 
-  const obtenirFilms = async () => {
-    try {
-      const reponse = await axios({
-        method: 'GET',
-        url: 'http://localhost:5000/api/films',
-      })
-      setFilms(reponse.data)
-    } catch (e) {
-      console.log(e)
-    } finally {
-      setLoading(false)
-    }
-  }
 
-  useEffect(() => {
-    console.log('execution de useEffect')
-  })
-
-  console.log('execution de App')
+  const { films, loading } = UseFilms()
 
   return (
     <SafeAreaView style={styles.container}>
