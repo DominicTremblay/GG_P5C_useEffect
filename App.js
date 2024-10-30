@@ -4,6 +4,8 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
 import { collectionFilms } from './data/films'
 import FilmVue from './fonctionalites/films/vues/Film.vue'
 import axios from 'axios'
+import Exemple from './fonctionalites/exemple/Exemple'
+import Exemple1 from './fonctionalites/exemple/Exemple1'
 
 export default function App() {
   const [films, setFilms] = useState(collectionFilms)
@@ -15,7 +17,6 @@ export default function App() {
         method: 'GET',
         url: 'http://localhost:5000/api/films',
       })
-      console.log("Reponse: ", reponse.data)
       setFilms(reponse.data)
     } catch (e) {
       console.log(e)
@@ -28,9 +29,16 @@ export default function App() {
     obtenirFilms()
   }, [])
 
+  useEffect(() => {
+    console.log('execution de useEffect')
+  })
+
+  console.log('execution de App')
+
   return (
     <SafeAreaView style={styles.container}>
-      <FilmVue films={films} loading={loading} />
+      {/* <FilmVue films={films} loading={loading} /> */}
+      <Exemple1 />
       <StatusBar style="auto" />
     </SafeAreaView>
   )
