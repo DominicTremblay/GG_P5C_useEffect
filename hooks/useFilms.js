@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useReducer } from 'react'
 import axios from 'axios'
-import { collectionFilms } from '../data/films';
+import dataReducer, {
+  CHARGER_DONNEES,
+  CHANGER_STATUT_LOADING,
+} from '../reducers/dataReducer'
 
-const UseFilms = () => {
-
-  const [films, setFilms] = useState(collectionFilms)
-  const [loading, setLoading] = useState(true)
+const UseFilms = (etatInitial) => {
+  const [state, dispatch] = useReducer(dataReducer, etatInitial)
 
   const obtenirFilms = async () => {
     try {
@@ -13,11 +14,11 @@ const UseFilms = () => {
         method: 'GET',
         url: 'http://localhost:5000/api/films',
       })
-      setFilms(reponse.data)
+      dispatch({ type: CHARGER_DONNEES, payload: reponse.data })
     } catch (e) {
       console.log(e)
     } finally {
-      setLoading(false)
+      dispatch({ type: CHANGER_STATUT_LOADING, payload: false })
     }
   }
 
@@ -25,7 +26,7 @@ const UseFilms = () => {
     obtenirFilms()
   }, [])
 
-  return {films, loading}
+  return [state, dispatch]
 }
 
-export default UseFilms;
+export default UseFilms
