@@ -26,10 +26,6 @@ export default function App() {
   }
 
   useEffect(() => {
-    obtenirFilms()
-  }, [])
-
-  useEffect(() => {
     console.log('execution de useEffect')
   })
 
@@ -37,8 +33,8 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <FilmVue films={films} loading={loading} /> */}
-      <Exemple1 />
+      <FilmVue films={films} loading={loading} />
+      {/* <Exemple1 /> */}
       <StatusBar style="auto" />
     </SafeAreaView>
   )
