@@ -8,6 +8,9 @@ const Exemple1 = (props) => {
 
   const afficherMsg = (message) => console.log({ message })
 
+
+
+
   useEffect(() => {
     console.log('-'.repeat(20))
     console.log('Exécution du useEffect')
@@ -20,6 +23,16 @@ const Exemple1 = (props) => {
     afficherMsg(text)
     console.log('-'.repeat(20))
   })
+
+
+  useEffect(() => {
+
+    if (errMsg) {
+      console.log({errMsg})
+    }
+
+  })
+
 
   return (
     <View style={styles.container}>
