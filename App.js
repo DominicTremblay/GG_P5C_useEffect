@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
+import FormSession from './fonctionalites/session/composants/Form.session.composant'
 
 import VueFilm from './fonctionalites/film/vues/Vue.Film'
 import axios from 'axios'
@@ -31,7 +32,8 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   return (
     <SafeAreaView style={styles.container}>
-      <VueFilm films={films} loading={loading} />
+      <FormSession />
+      {/* <VueFilm films={films} loading={loading} /> */}
       <StatusBar style="auto" />
     </SafeAreaView>
   )
