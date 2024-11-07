@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import VueFilm from './fonctionalites/film/vues/Vue.Film'
 import axios from 'axios'
+import VueSession from './fonctionalites/session/vues/Vue.session'
+
+const Stack = createNativeStackNavigator()
 
 export default function App() {
   const chargerListFilms = async () => {
@@ -30,10 +35,18 @@ export default function App() {
   const [films, setFilms] = useState([])
   const [loading, setLoading] = useState(true)
   return (
-    <SafeAreaView style={styles.container}>
-      <VueFilm films={films} loading={loading} />
-      <StatusBar style="auto" />
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={styles.container}>
+        <Stack.Navigator initialRouteName="Session">
+          <Stack.Screen name="Session" component={VueSession} />
+          <Stack.Screen
+            name="Films"
+            children={() => <VueFilm films={films} loading={loading} />}
+          />
+        </Stack.Navigator>
+        <StatusBar style="auto" />
+      </SafeAreaView>
+    </NavigationContainer>
   )
 }
 
@@ -41,7 +54,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 20,
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 })
